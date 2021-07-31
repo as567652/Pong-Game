@@ -8,15 +8,17 @@ function Ball:init()
     
     math.randomseed(os.time())
 
-    self.speed = 190
+    self.speed = 185
 
     self.dx = math.random(2) == 1 and -self.speed or self.speed
     self.dy = math.random(-self.speed, self.speed)
 end
 
 function Ball:update(dt)
-    self.x = self.x + self.dx * dt
-    self.y = self.y + self.dy * dt
+    if Gamestate ~= 'PAUSE_TO_PLAY' then
+        self.x = self.x + self.dx * dt
+        self.y = self.y + self.dy * dt    
+    end
 end
 
 function  Ball:collides(Box)
