@@ -12,7 +12,7 @@ require 'modules/insource/class_files/Ball'
 require 'modules/insource/class_files/Paddle'
 require 'modules/insource/class_files/Menu'
 
-local Vs_Player_Module = require 'modules/insource/Vs_Player_Module'
+local Player_Module = require 'modules/insource/Player_Module'
 local Menu_Module = require 'modules/insource/Menu_Module'
 
 Font_file = 'fonts/bb.ttf'
@@ -35,24 +35,25 @@ function love.load()
     })
 
     Gamestate = 'START'
+    Prev_Gamestate = ''
 
     Sounds = {
         ['wall_hit'] = love.audio.newSource('audio/hit.wav', 'static'),
         ['point_score'] = love.audio.newSource('audio/point.wav', 'static')
     }
 
-    Vs_Player_Module.load()
+    Player_Module.load()
     Menu_Module.load()
 end
 
 function love.update(dt)
-    Vs_Player_Module.update(dt)
+    Player_Module.update(dt)
     Menu_Module.update(dt)
 end
 
 function love.keypressed(key)
     Menu_Module.keypressed(key)
-    Vs_Player_Module.keypressed(key)
+    Player_Module.keypressed(key)
 end
 
 function love.draw()
@@ -63,7 +64,7 @@ function love.draw()
     DisplayFPS()
     
     Menu_Module.draw()
-    Vs_Player_Module.draw()
+    Player_Module.draw()
 
     Push:apply('end')
 end

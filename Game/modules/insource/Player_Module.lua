@@ -1,6 +1,6 @@
-local Vs_Player_Module = {}
+local Player_Module = {}
 
-function Vs_Player_Module.load()
+function Player_Module.load()
     P1_score = 0
     P2_score = 0    
 
@@ -12,20 +12,23 @@ function Vs_Player_Module.load()
     Pause_timer = 80
 end
 
-function Vs_Player_Module.update(dt)
-    if Gamestate == 'PLAY' then
-
+function Player_Module.update(dt)
+    if Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' then
         Paddle_L:update(dt)
         Paddle_R:update(dt)
 
         MyBall:update(dt)
 
-        if love.keyboard.isDown('w') then
-            Paddle_L.dy = -Paddle_Speed
-        elseif love.keyboard.isDown('s') then
-            Paddle_L.dy = Paddle_Speed
+        if Gamestate == 'PLAY' then
+            if love.keyboard.isDown('w') then
+                Paddle_L.dy = -Paddle_Speed
+            elseif love.keyboard.isDown('s') then
+                Paddle_L.dy = Paddle_Speed
+            else
+                Paddle_L.dy = 0
+            end
         else
-            Paddle_L.dy = 0
+            Paddle_L:AI(dt, MyBall.y)
         end
         
         if love.keyboard.isDown('up') then
@@ -63,7 +66,7 @@ function Vs_Player_Module.update(dt)
         Pause_timerr(Pause_timer)
         Pause_timer = Pause_timer - 1
         if Pause_timer == 0 then
-            Gamestate = 'PLAY'
+            Gamestate = Prev_Gamestate
             Pause_timer = 80
         end
     end
@@ -79,46 +82,40 @@ function Score_Reset()
     P2_score = 0  
 end
 
-function Vs_Player_Module.keypressed(key)
+function Player_Module.keypressed(key)
     if Gamestate == 'START' then
         if key == 'return' then
             Gamestate = 'MAIN_MENU'
         end
-    elseif Gamestate == 'PLAY' then
+    elseif Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' then
         if key == 'space' then
             Gamestate = 'PAUSE'
         end
     end
 end
 
-function Vs_Player_Module.draw()
+function Player_Module.draw()
     if Gamestate == 'START' then
         love.graphics.setFont(Titlefont)
         love.graphics.printf(". . P O N G . .", 0, VIRTUAL_HEIGHT / 2 - 50, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(Smallfont)
         love.graphics.printf("[ Press Enter To Continue.. ]", 0, VIRTUAL_HEIGHT / 2, VIRTUAL_WIDTH, 'center')
-    else
-        love.graphics.setFont(Smallfont)
+    elseif Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' or Gamestate == 'PAUSE_TO_PLAY' then
+        love.graphics.setFont(Smallfont) 
+        love.graphics.printf("Ready - Set - Pong!!!", 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.setFont(Titlefont)
+        love.graphics.printf(P1_score, VIRTUAL_WIDTH / 2 - 108, 15, VIRTUAL_WIDTH)
+        love.graphics.printf(P2_score, VIRTUAL_WIDTH / 2 + 80, 15, VIRTUAL_WIDTH)
+        love.graphics.setFont(Smallfont) 
+        Paddle_L:render()
+        MyBall:render()
+        Paddle_R:render() 
         if Gamestate == 'PLAY' then
-            love.graphics.printf("Ready - Set - Pong!!!", 0, 10, VIRTUAL_WIDTH, 'center')
-            love.graphics.setFont(Titlefont)
-            love.graphics.printf(P1_score, VIRTUAL_WIDTH / 2 - 108, 15, VIRTUAL_WIDTH)
-            love.graphics.printf(P2_score, VIRTUAL_WIDTH / 2 + 80, 15, VIRTUAL_WIDTH)
-            love.graphics.setFont(Smallfont)
             love.graphics.printf("Press [ SPACE ] To Pause The PONG", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
-            MyBall:render()
-            Paddle_L:render()
-            Paddle_R:render()
-        elseif Gamestate == 'PAUSE_TO_PLAY' then
-            love.graphics.printf("Ready - Set - Pong!!!", 0, 10, VIRTUAL_WIDTH, 'center')
-            love.graphics.setFont(Titlefont)
-            love.graphics.printf(P1_score, VIRTUAL_WIDTH / 2 - 108, 15, VIRTUAL_WIDTH)
-            love.graphics.printf(P2_score, VIRTUAL_WIDTH / 2 + 80, 15, VIRTUAL_WIDTH)
-            MyBall:render()
-            Paddle_L:render()
-            Paddle_R:render()  
+        elseif Gamestate == 'COMPUTER_MODE' then
+            love.graphics.printf("Press [ SPACE ] To Pause The PONG", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
         end
     end
 end
 
-return Vs_Player_Module
+return Player_Module

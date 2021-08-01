@@ -79,8 +79,10 @@ function Menu_Module.keypressed(key)
         if key == 'return' then
             if Mode_Selection:Option_Selected() == 'VS Computer' then
                 Gamestate = 'COMPUTER_MODE'
+                Prev_Gamestate = 'COMPUTER_MODE'
             elseif Mode_Selection:Option_Selected() == 'VS Player' then
                 Gamestate = 'PLAY'
+                Prev_Gamestate = 'PLAY'
             else
                 Gamestate = 'MAIN_MENU'
             end 
@@ -92,6 +94,7 @@ function Menu_Module.keypressed(key)
                 Gamestate = 'PAUSE_TO_PLAY'
             else
                 Gamestate = 'QUIT_CONF_1'
+                QUIT_CONF_1.current_counter = 1
             end
         end
         Pause_Menu:KeyPressFunc(key)
@@ -103,6 +106,7 @@ function Menu_Module.keypressed(key)
                 Score_Reset()
             else
                 Gamestate = 'PAUSE'
+                Pause_Menu.current_counter = 1
             end
         end
         QUIT_CONF_1:KeyPressFunc(key)
