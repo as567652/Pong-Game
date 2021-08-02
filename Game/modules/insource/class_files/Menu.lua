@@ -64,3 +64,8 @@ function Menu:msg_print(msg)
     love.graphics.setFont(Smallfont)
     love.graphics.printf(msg, 0, self.L + self.Gap / 2 + 10 , VIRTUAL_WIDTH, 'center')
 end
+
+function Menu:msg_print_winner(msg)
+    love.graphics.setFont(MidFont)
+    love.graphics.printf(msg, 0, VIRTUAL_HEIGHT / 2 , VIRTUAL_WIDTH, 'center')
+end

@@ -2,7 +2,8 @@ local Player_Module = {}
 
 function Player_Module.load()
     P1_score = 0
-    P2_score = 0    
+    P2_score = 0
+    Target = 10    
 
     Paddle_L = Paddle(5, 30, 5, 20)
     Paddle_R = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 40, 5, 20)
@@ -30,7 +31,7 @@ function Player_Module.update(dt)
         else
             Paddle_L:AI(dt, MyBall.y)
         end
-        
+
         if love.keyboard.isDown('up') then
             Paddle_R.dy = -Paddle_Speed
         elseif love.keyboard.isDown('down') then
@@ -62,6 +63,13 @@ function Player_Module.update(dt)
             Sounds['point_score']:play()
             MyBall:reset()
         end
+
+        if P1_score == Target then
+            Gamestate = 'P1_WINNER'
+        elseif P2_score == Target then
+            Gamestate = 'P2_WINNER'
+        end
+
     elseif Gamestate == 'PAUSE_TO_PLAY' then
         Pause_timerr(Pause_timer)
         Pause_timer = Pause_timer - 1
@@ -79,7 +87,7 @@ end
 
 function Score_Reset()
     P1_score = 0
-    P2_score = 0  
+    P2_score = 0
 end
 
 function Player_Module.keypressed(key)
@@ -103,6 +111,7 @@ function Player_Module.draw()
     elseif Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' or Gamestate == 'PAUSE_TO_PLAY' then
         love.graphics.setFont(Smallfont) 
         love.graphics.printf("Ready - Set - Pong!!!", 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf("[ Target - "..tostring(Target).." ]", 0, 50, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(Titlefont)
         love.graphics.printf(P1_score, VIRTUAL_WIDTH / 2 - 108, 15, VIRTUAL_WIDTH)
         love.graphics.printf(P2_score, VIRTUAL_WIDTH / 2 + 80, 15, VIRTUAL_WIDTH)

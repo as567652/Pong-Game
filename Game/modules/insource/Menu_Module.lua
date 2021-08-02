@@ -24,6 +24,10 @@ function Menu_Module.load()
     QUIT_CONF_1 = Menu()
     QUIT_CONF_1.Options = {"Yes", "No"}
     QUIT_CONF_1.n = 2
+
+    WINNER = Menu()
+    WINNER.Options = {"[ Back To Menu ]"}
+    WINNER.n = 1
 end
 
 function Menu_Module.update(dt)
@@ -39,6 +43,9 @@ function Menu_Module.update(dt)
         Pause_Menu:update(dt)
     elseif Gamestate == 'QUIT_CONF_1' then
         QUIT_CONF_1:update(dt)
+    elseif Gamestate == 'P1_WINNER' or Gamestate == 'P2_WINNER' then
+        WINNER:update(dt)
+        Score_Reset()
     end
 end
 
@@ -110,6 +117,16 @@ function Menu_Module.keypressed(key)
             end
         end
         QUIT_CONF_1:KeyPressFunc(key)
+    elseif Gamestate == 'P1_WINNER' then
+        if key == 'return' then
+            Gamestate = 'MAIN_MENU'
+        end
+        WINNER:KeyPressFunc(key)
+    elseif Gamestate == 'P2_WINNER' then
+        if key == 'return' then
+            Gamestate = 'MAIN_MENU'
+        end
+        WINNER:KeyPressFunc(key)
     end
 end
 
@@ -129,6 +146,20 @@ function Menu_Module.draw()
     elseif Gamestate == 'QUIT_CONF_1' then
         QUIT_CONF_1:render()
         QUIT_CONF_1:msg_print("Progress Won't Be Saved, Continue ??")
+    elseif Gamestate == 'P1_WINNER' then
+        WINNER:render()
+        if Prev_Gamestate == 'PLAY' then
+            WINNER:msg_print_winner("Congrats Player 1\nYou Won !!!!")
+        else
+            WINNER:msg_print_winner("Computer Won :(")
+        end
+    elseif Gamestate == 'P2_WINNER' then
+        WINNER:render()
+        if Prev_Gamestate == 'PLAY' then
+            WINNER:msg_print_winner("Congrats Player 2\nYou Won !!!!")
+        else
+            WINNER:msg_print_winner("Congratulations\n You Won !!!!")
+        end
     end
 end
 
