@@ -16,9 +16,21 @@ function Menu:render()
     --love.graphics.printf(self.current_counter, 0, 10, VIRTUAL_WIDTH, 'center')
     for y = 1, self.n do
         if self.current_counter == y then
-            love.graphics.printf('-'..self.Options[y]..'-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
+            if self.Options[y] == '[ Back To Menu ]' then
+                love.graphics.setFont(Smallfont)
+                love.graphics.printf('-'..self.Options[y]..'-', 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
+                love.graphics.setFont(MidFont)
+            else
+                love.graphics.printf('-'..self.Options[y]..'-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
+            end
         else
-            love.graphics.printf(self.Options[y], 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')            
+            if self.Options[y] == '[ Back To Menu ]' then
+                love.graphics.setFont(Smallfont)
+                love.graphics.printf(self.Options[y], 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
+                love.graphics.setFont(MidFont)
+            else
+                love.graphics.printf(self.Options[y], 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
+            end       
         end
         X = X + 20
     end
