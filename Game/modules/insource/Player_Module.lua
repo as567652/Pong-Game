@@ -3,7 +3,6 @@ local Player_Module = {}
 function Player_Module.load()
     P1_score = 0
     P2_score = 0
-    Target = 10    
 
     Paddle_L = Paddle(5, 30, 5, 20)
     Paddle_R = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 40, 5, 20)
@@ -25,7 +24,7 @@ function Player_Module.update(dt)
                 Paddle_L.dy = -Paddle_Speed
             elseif love.keyboard.isDown('s') then
                 Paddle_L.dy = Paddle_Speed
-            else
+            else 
                 Paddle_L.dy = 0
             end
         else

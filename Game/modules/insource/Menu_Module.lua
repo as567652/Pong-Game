@@ -5,11 +5,7 @@ function Menu_Module.load()
     Menu_Options_Var.Options = {"Play", "Leaderboard", "Settings", "Credits", "Exit"}
     Menu_Options_Var.n = 5
 
-    Settings_Options_Var = Menu()
-    Settings_Options_Var.Options = {"Adjust Volume", "[ Back To Menu ]"}
-    Settings_Options_Var.n = 2
-
-    QUIT_CONF_0 = Menu()
+    QUIT_CONF_0 = Menu() 
     QUIT_CONF_0.Options = {"Yes", "No"}
     QUIT_CONF_0.n = 2
 
@@ -28,6 +24,23 @@ function Menu_Module.load()
     WINNER = Menu()
     WINNER.Options = {"[ Back To Menu ]"}
     WINNER.n = 1
+
+    VS_COMP_Menu = New_Menu()
+    VS_COMP_Menu.UD = 2
+    VS_COMP_Menu.first = {{"Target", 8, 1}, {"Difficulty", 3, 1}}
+    VS_COMP_Menu.second["Target"] = {5, 7, 9, 11, 13, 15, 17, 19}
+    VS_COMP_Menu.second["Difficulty"] = {"Easy", "Medium", "Hard"}
+
+    VS_PLAYER_Menu = New_Menu()
+    VS_PLAYER_Menu.UD = 1
+    VS_PLAYER_Menu.first = {{"Target", 8, 1}}
+    VS_PLAYER_Menu.second["Target"] = {5, 7, 9, 11, 13, 15, 17, 19}
+
+    Settings_Options_Var = New_Menu()
+    Settings_Options_Var.UD = 2
+    Settings_Options_Var.first = {{"Volume", 5, 5}, {"Music", 2, 1}}
+    Settings_Options_Var.second["Volume"] = {1, 2, 3, 4, 5}
+    Settings_Options_Var.second["Music"] = {"On", "Off"}
 end
 
 function Menu_Module.update(dt)
@@ -39,6 +52,10 @@ function Menu_Module.update(dt)
         QUIT_CONF_0:update(dt)
     elseif Gamestate == 'MODE_MENU' then
         Mode_Selection:update(dt)
+    elseif Gamestate == 'VS_COMP_Menu' then
+        VS_COMP_Menu:update(dt)
+    elseif Gamestate == 'VS_PLAYER_Menu' then
+        VS_PLAYER_Menu:update(dt)
     elseif Gamestate == 'PAUSE' then
         Pause_Menu:update(dt)
     elseif Gamestate == 'QUIT_CONF_1' then
@@ -66,10 +83,8 @@ function Menu_Module.keypressed(key)
         Menu_Options_Var:KeyPressFunc(key)
     elseif Gamestate == 'SETTINGS_MENU' then
         if key == 'return' then
-            if Settings_Options_Var:Option_Selected() == '[ Back To Menu ]' then
-                Gamestate = 'MAIN_MENU'
-                Menu_Options_Var.current_counter = 1
-            end
+            Gamestate = 'MAIN_MENU'
+            Menu_Options_Var.current_counter = 1
         end
         Settings_Options_Var:KeyPressFunc(key)
     elseif Gamestate == 'QUIT_CONF_0' then
@@ -85,16 +100,28 @@ function Menu_Module.keypressed(key)
     elseif Gamestate == 'MODE_MENU' then
         if key == 'return' then
             if Mode_Selection:Option_Selected() == 'VS Computer' then
-                Gamestate = 'COMPUTER_MODE'
-                Prev_Gamestate = 'COMPUTER_MODE'
+                Gamestate = 'VS_COMP_Menu'
             elseif Mode_Selection:Option_Selected() == 'VS Player' then
-                Gamestate = 'PLAY'
-                Prev_Gamestate = 'PLAY'
+                Gamestate = 'VS_PLAYER_Menu'
             else
                 Gamestate = 'MAIN_MENU'
             end 
         end
         Mode_Selection:KeyPressFunc(key)
+    elseif Gamestate == 'VS_COMP_Menu' then
+        if key == 'return' then
+            Gamestate = 'COMPUTER_MODE'
+            Prev_Gamestate = 'COMPUTER_MODE'
+            Target = VS_COMP_Menu:get_value("Target")
+        end
+        VS_COMP_Menu:KeyPressFunc(key)
+    elseif Gamestate == 'VS_PLAYER_Menu' then
+        if key == 'return' then
+            Gamestate = 'PLAY'
+            Prev_Gamestate = 'PLAY'
+            Target = VS_PLAYER_Menu:get_value("Target")
+        end
+        VS_PLAYER_Menu:KeyPressFunc(key)
     elseif Gamestate == 'PAUSE' then
         if key == 'return' then
             if Pause_Menu:Option_Selected() == 'Resume' then
@@ -133,19 +160,28 @@ end
 function Menu_Module.draw()
     if Gamestate == 'MAIN_MENU' then
         Menu_Options_Var:render()
+        Menu_Options_Var:msg_print(". . M E N U . .")
     elseif Gamestate == 'SETTINGS_MENU' then
         Settings_Options_Var:render()
+        Settings_Options_Var:msg_print(". . S E T T I N G S . . ")
     elseif Gamestate == 'QUIT_CONF_0' then
         QUIT_CONF_0:render()
-        QUIT_CONF_0:msg_print("Are You Sure You Want To Quit ??")
+        QUIT_CONF_0:msg_print(". . Are You Sure You Want To Quit ?? . . ")
     elseif Gamestate == 'MODE_MENU' then
         Mode_Selection:render()
+        Mode_Selection:msg_print(". . Opponent Selection . .")
+    elseif Gamestate == 'VS_COMP_Menu' then
+        VS_COMP_Menu:render()
+        VS_COMP_Menu:msg_print(' . . Game Settings . .')
+    elseif Gamestate == 'VS_PLAYER_Menu' then
+        VS_PLAYER_Menu:render()
+        VS_PLAYER_Menu:msg_print(' . . Game Settings . .')
     elseif Gamestate == 'PAUSE' then
         Pause_Menu:render()
-        Pause_Menu:msg_print("...Game Paused...")
+        Pause_Menu:msg_print(". . P A U S E D . . ")
     elseif Gamestate == 'QUIT_CONF_1' then
         QUIT_CONF_1:render()
-        QUIT_CONF_1:msg_print("Progress Won't Be Saved, Continue ??")
+        QUIT_CONF_1:msg_print(". . Progress Won't Be Saved, Continue ?? . . ")
     elseif Gamestate == 'P1_WINNER' then
         WINNER:render()
         if Prev_Gamestate == 'PLAY' then

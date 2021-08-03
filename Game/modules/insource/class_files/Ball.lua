@@ -4,7 +4,7 @@ function Ball:init()
     self.x = VIRTUAL_WIDTH / 2
     self.y = VIRTUAL_HEIGHT / 2 - 2.5
     self.width = 5
-    self.height = 5
+    self.height = 5 
     
     math.randomseed(os.time())
 

@@ -3,7 +3,7 @@ Menu = Class{}
 function Menu:init()
     self.L = 40
     self.Gap = 72
-    self.Options = {}
+    self.Options = {} 
     self.current_counter = 1
     self.n = 0
 end
@@ -18,10 +18,13 @@ function Menu:render()
         if self.current_counter == y then
             if self.Options[y] == '[ Back To Menu ]' then
                 love.graphics.setFont(Smallfont)
-                love.graphics.printf('-'..self.Options[y]..'-', 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
+                love.graphics.printf('-  '..self.Options[y]..'  -', 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
                 love.graphics.setFont(MidFont)
             else
-                love.graphics.printf('-'..self.Options[y]..'-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
+                love.graphics.printf(self.Options[y], 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
+                love.graphics.printf('-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH - 200, 'center')
+                love.graphics.printf('-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH + 200, 'center')
+
             end
         else
             if self.Options[y] == '[ Back To Menu ]' then

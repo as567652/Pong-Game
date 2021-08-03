@@ -11,6 +11,7 @@ Push = require 'modules/outsource/push'
 require 'modules/insource/class_files/Ball'
 require 'modules/insource/class_files/Paddle'
 require 'modules/insource/class_files/Menu'
+require 'modules/insource/class_files/New_Menu'
 
 local Player_Module = require 'modules/insource/Player_Module'
 local Menu_Module = require 'modules/insource/Menu_Module'
@@ -21,6 +22,7 @@ function love.load()
     love.window.setTitle('THE PONG GAME')
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    Target = 0
     N = 8
 
     Smallfont = love.graphics.newFont(Font_file, N)

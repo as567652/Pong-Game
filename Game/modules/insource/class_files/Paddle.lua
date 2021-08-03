@@ -9,7 +9,7 @@ function Paddle:init(x, y, width, height)
     self.dy = 0
 end
 
-function Paddle:update(dt)
+function Paddle:update(dt) 
     if self.dy < 0 then
         self.y = math.max(self.y + self.dy * dt, 0)
     elseif self.dy > 0 then
