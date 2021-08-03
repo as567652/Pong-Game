@@ -34,9 +34,9 @@ First you must have these softwares and languages installed on your system -
 
 
 ## Launch
-Just run this command where Folder **Pong_Game** is located.
+Just run this command where Folder **Game** is located.
 ```
-$ love Pong_Game
+$ love Game
 ```
 A window will pop up and you are good to go.
 
