@@ -28,12 +28,14 @@ function love.load()
     Music_stat = 'On'
     SFX_stat = 'On'
     Volume_Var = 5
+    Count_Down_ULTRA = 3
     N = 8
 
     Smallfont = love.graphics.newFont(Font_file, N)
     MidFont = love.graphics.newFont(Font_file, N * 2)
     Scorefont = love.graphics.newFont(Font_file, N * 3)
     Titlefont = love.graphics.newFont(Font_file, N * 4)
+    Countfont = love.graphics.newFont(Font_file, N * 5)
     
     Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,

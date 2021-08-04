@@ -9,7 +9,7 @@ function Player_Module.load()
 
     MyBall = Ball()
 
-    Pause_timer = 80
+    Count_Down = (Count_Down_ULTRA + 1) * 60
 end
 
 function Player_Module.update(dt)
@@ -90,18 +90,13 @@ function Player_Module.update(dt)
         end
 
     elseif Gamestate == 'PAUSE_TO_PLAY' then
-        Pause_timerr(Pause_timer)
-        Pause_timer = Pause_timer - 1
-        if Pause_timer == 0 then
-            Gamestate = Prev_Gamestate
-            Pause_timer = 80
+        if Count_Down > 0 then
+            Count_Down = Count_Down - 1
+        elseif Count_Down == 0 then
+            Gamestate = 'PLAY'
+            Count_Down = (Count_Down_ULTRA + 1) * 60
         end
     end
-end
-
-function Pause_timerr(n)
-    love.graphics.setFont(Scorefont)
-    love.graphics.printf(n, 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
 end
 
 function Score_Reset()
@@ -142,6 +137,14 @@ function Player_Module.draw()
             love.graphics.printf("Press [ SPACE ] To Pause The PONG", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
         elseif Gamestate == 'COMPUTER_MODE' then
             love.graphics.printf("Press [ SPACE ] To Pause The PONG", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
+        elseif Gamestate == 'PAUSE_TO_PLAY' then
+            love.graphics.setFont(Countfont)
+            K = math.floor(Count_Down / 60)
+            if K == 0 then
+                love.graphics.printf('GO!!!', 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
+            else
+                love.graphics.printf(K, 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
+            end
         end
     end
 end

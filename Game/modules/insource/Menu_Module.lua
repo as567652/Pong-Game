@@ -27,13 +27,13 @@ function Menu_Module.load()
 
     VS_COMP_Menu = New_Menu()
     VS_COMP_Menu.UD = 2
-    VS_COMP_Menu.first = {{"Target", 10, 1}, {"Difficulty", 3, 1}}
+    VS_COMP_Menu.first = {{"Target", 10, 3}, {"Difficulty", 3, 1}}
     VS_COMP_Menu.second["Target"] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}
     VS_COMP_Menu.second["Difficulty"] = {"Easy", "Medium", "Hard"}
 
     VS_PLAYER_Menu = New_Menu()
     VS_PLAYER_Menu.UD = 1
-    VS_PLAYER_Menu.first = {{"Target", 10, 1}}
+    VS_PLAYER_Menu.first = {{"Target", 10, 3}}
     VS_PLAYER_Menu.second["Target"] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}
 
     Settings_Options_Var = New_Menu()
