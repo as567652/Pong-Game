@@ -20,11 +20,10 @@ function Menu:render()
                 love.graphics.setFont(Smallfont)
                 love.graphics.printf('-  '..self.Options[y]..'  -', 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
                 love.graphics.setFont(MidFont)
-            else
+            elseif self.Options[y] ~= "" then
                 love.graphics.printf(self.Options[y], 0, self.L + self.Gap + X, VIRTUAL_WIDTH, 'center')
                 love.graphics.printf('-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH - 200, 'center')
                 love.graphics.printf('-', 0, self.L + self.Gap + X, VIRTUAL_WIDTH + 200, 'center')
-
             end
         else
             if self.Options[y] == '[ Back To Menu ]' then
