@@ -22,7 +22,12 @@ function love.load()
     love.window.setTitle('THE PONG GAME')
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    Music = love.audio.newSource("audio/music.mp3", "stream")
+
     Target = 0
+    Music_stat = 'On'
+    SFX_stat = 'On'
+    Volume_Var = 5
     N = 8
 
     Smallfont = love.graphics.newFont(Font_file, N)
@@ -41,7 +46,9 @@ function love.load()
 
     Sounds = {
         ['wall_hit'] = love.audio.newSource('audio/hit.wav', 'static'),
-        ['point_score'] = love.audio.newSource('audio/point.wav', 'static')
+        ['point_score'] = love.audio.newSource('audio/point.wav', 'static'),
+        ['up_down'] = love.audio.newSource('audio/enter.wav', 'static'),
+        ['enter'] = love.audio.newSource('audio/enter.wav', 'static'),
     }
 
     Player_Module.load()
@@ -51,9 +58,36 @@ end
 function love.update(dt)
     Player_Module.update(dt)
     Menu_Module.update(dt)
+    if Music_stat == 'On' then
+        Music:play()
+        if Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' then
+            Music:setVolume(Volume_Var / 10)
+        else
+            Music:setVolume(0.2 * Volume_Var)
+        end 
+    else
+        Music:stop()
+    end
 end
 
 function love.keypressed(key)
+    if SFX_stat == 'On' then
+        if Gamestate == 'PLAY' or Gamestate == 'COMPUTER_MODE' then
+            if key == 'up' or key == 'down' then
+                Sounds['up_down']:stop() 
+            end
+        else
+            if key == 'up' or key == 'down' then
+                Sounds['up_down']:play() 
+            end
+        end
+        if key == 'return' then
+            Sounds['enter']:play()
+        end
+    else
+        Sounds['up_down']:stop() 
+        Sounds['enter']:stop()
+    end
     Menu_Module.keypressed(key)
     Player_Module.keypressed(key)
 end

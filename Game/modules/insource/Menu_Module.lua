@@ -33,14 +33,15 @@ function Menu_Module.load()
 
     VS_PLAYER_Menu = New_Menu()
     VS_PLAYER_Menu.UD = 1
-    VS_PLAYER_Menu.first = {{"Target", 8, 1}}
-    VS_PLAYER_Menu.second["Target"] = {5, 7, 9, 11, 13, 15, 17, 19}
+    VS_PLAYER_Menu.first = {{"Target", 10, 1}}
+    VS_PLAYER_Menu.second["Target"] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}
 
     Settings_Options_Var = New_Menu()
-    Settings_Options_Var.UD = 2
-    Settings_Options_Var.first = {{"Volume", 5, 5}, {"Music", 2, 1}}
+    Settings_Options_Var.UD = 3
+    Settings_Options_Var.first = {{"Volume", 5, 5}, {"Music", 2, 1}, {"SFX", 2, 1}}
     Settings_Options_Var.second["Volume"] = {1, 2, 3, 4, 5}
     Settings_Options_Var.second["Music"] = {"On", "Off"}
+    Settings_Options_Var.second["SFX"] = {"On", "Off"}
 end
 
 function Menu_Module.update(dt)
@@ -88,6 +89,13 @@ function Menu_Module.keypressed(key)
             Gamestate = 'MAIN_MENU'
             Menu_Options_Var.current_counter = 1
             Settings_Options_Var.current_counter_UD = 1
+            Music_stat = Settings_Options_Var:get_value("Music")
+            SFX_stat = Settings_Options_Var:get_value("SFX")
+            Volume_Var = Settings_Options_Var:get_value("Volume")
+            Sounds['wall_hit']:setVolume(0.2 * Volume_Var)
+            Sounds['point_score']:setVolume(0.2 * Volume_Var)
+            Sounds['up_down']:setVolume(0.2 * Volume_Var)
+            Sounds['enter']:setVolume(0.2 * Volume_Var)
         end
         Settings_Options_Var:KeyPressFunc(key)
     elseif Gamestate == 'QUIT_CONF_0' then

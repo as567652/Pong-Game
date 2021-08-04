@@ -41,25 +41,45 @@ function Player_Module.update(dt)
 
         if MyBall:collides(Paddle_L) and MyBall.x < 35 then
             MyBall.dx = -MyBall.dx  
-            Sounds['wall_hit']:play()
+            if SFX_stat == "On" then
+                Sounds['wall_hit']:play()
+            else
+                Sounds['wall_hit']:stop()
+            end
         end
         if MyBall:collides(Paddle_R) and MyBall.x + MyBall.width > VIRTUAL_WIDTH - 35 then
             MyBall.dx = -MyBall.dx
-            Sounds['wall_hit']:play()
+            if SFX_stat == "On" then
+                Sounds['wall_hit']:play()
+            else
+                Sounds['wall_hit']:stop()
+            end
         end
 
         if MyBall:UDBoundary_Collide() and (MyBall.y < 10 or MyBall.y + MyBall.height > VIRTUAL_HEIGHT - 10) then
             MyBall.dy = - MyBall.dy
-            Sounds['wall_hit']:play()
+            if SFX_stat == "On" then
+                Sounds['wall_hit']:play()
+            else
+                Sounds['wall_hit']:stop()
+            end
         end
 
         if MyBall:LRBoundary_Collide() == 1 then
             P1_score = P1_score + 1
-            Sounds['point_score']:play()
+            if SFX_stat == "On" then
+                Sounds['point_score']:play()
+            else
+                Sounds['point_score']:stop()
+            end
             MyBall:reset()
         elseif MyBall:LRBoundary_Collide() == 2 then
             P2_score = P2_score + 1
-            Sounds['point_score']:play()
+            if SFX_stat == "On" then
+                Sounds['point_score']:play()
+            else
+                Sounds['point_score']:stop()
+            end
             MyBall:reset()
         end
 
