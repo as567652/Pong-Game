@@ -34,9 +34,9 @@ First you must have these softwares and languages installed on your system -
 
 
 ## Launch
-Just run this command where Folder **Game** is located.
+Just run this command where Folder **Pong_Game** is located.
 ```
-$ love Game
+$ love Pong_Game
 ```
 A window will pop up and you are good to go.
 
@@ -44,7 +44,7 @@ A window will pop up and you are good to go.
 ## Illustrations
 ### Game State FlowChart
 <p align="left">
-  <img src="Game/Images/Game State FlowChart.png" width=100% title="Game State FlowChart">
+  <img src="Pong_Game/Images/Game State FlowChart.png" width=100% title="Game State FlowChart">
 </p>
 
 ## Examples
@@ -58,6 +58,8 @@ A window will pop up and you are good to go.
   * [**Love2d Documentation**](https://love2d.org/wiki/Main_Page)
   * [**dafont(Fonts)**](https://www.dafont.com/)
   * [**jsfxr(Sound Effects)**](https://sfxr.me/)
+
+Audio File **music.mp3** taken from [Fesliyan Studios Website](https://www.fesliyanstudios.com/royalty-free-music/download/8-bit-menu/287)
   
 
 ## Other
