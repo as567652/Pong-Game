@@ -32,9 +32,10 @@ function Menu_Module.load()
     VS_COMP_Menu.second["Difficulty"] = {"Easy", "Medium", "Hard"}
 
     VS_PLAYER_Menu = New_Menu()
-    VS_PLAYER_Menu.UD = 1
-    VS_PLAYER_Menu.first = {{"Target", 10, 3}}
+    VS_PLAYER_Menu.UD = 2
+    VS_PLAYER_Menu.first = {{"Target", 10, 3}, {"Difficulty", 3, 1}}
     VS_PLAYER_Menu.second["Target"] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}
+    VS_PLAYER_Menu.second["Difficulty"] = {"Easy", "Medium", "Hard"}
 
     Settings_Options_Var = New_Menu()
     Settings_Options_Var.UD = 3
@@ -124,6 +125,24 @@ function Menu_Module.keypressed(key)
             Gamestate = 'COMPUTER_MODE'
             Prev_Gamestate = 'COMPUTER_MODE'
             Target = VS_COMP_Menu:get_value("Target")
+            Difficulty = VS_COMP_Menu:get_value("Difficulty")
+
+            if Difficulty == 'Easy' then
+                MyBall.speed = 180
+                Paddle_L.height = 25
+                Paddle_R.height = 25
+                Paddle_Speed = 130
+            elseif Difficulty == 'Medium' then
+                MyBall.speed = 190
+                Paddle_L.height = 20
+                Paddle_R.height = 20
+                Paddle_Speed = 155
+            elseif Difficulty == 'Hard' then
+                MyBall.speed = 200
+                Paddle_L.height = 15
+                Paddle_R.height = 15
+                Paddle_Speed = 165
+            end
             VS_COMP_Menu.current_counter_UD = 1
         end
         VS_COMP_Menu:KeyPressFunc(key)
@@ -132,6 +151,24 @@ function Menu_Module.keypressed(key)
             Gamestate = 'PLAY'
             Prev_Gamestate = 'PLAY'
             Target = VS_PLAYER_Menu:get_value("Target")
+            Difficulty = VS_PLAYER_Menu:get_value("Difficulty")
+
+            if Difficulty == 'Easy' then
+                MyBall.speed = 180
+                Paddle_L.height = 25
+                Paddle_R.height = 25
+                AI_Paddle_Speed = 130
+            elseif Difficulty == 'Medium' then
+                MyBall.speed = 190
+                Paddle_L.height = 20
+                Paddle_R.height = 20
+                AI_Paddle_Speed = 155
+            elseif Difficulty == 'Hard' then
+                MyBall.speed = 200
+                Paddle_L.height = 15
+                Paddle_R.height = 15
+                AI_Paddle_Speed = 165
+            end
             VS_PLAYER_Menu.current_counter_UD = 1
         end
         VS_PLAYER_Menu:KeyPressFunc(key)
@@ -177,6 +214,7 @@ end
 
 function Menu_Module.draw()
     if Gamestate == 'MAIN_MENU' then
+        Difficulty = 'Medium'
         love.graphics.printf("New Play Mode (Coming Soon)", 0, 40 + 72 + 25, VIRTUAL_WIDTH, 'center')
         Menu_Options_Var:render()
         Menu_Options_Var:msg_print(". . M E N U . .")
@@ -222,7 +260,7 @@ function Menu_Module.draw()
         love.graphics.printf("..Created by..", 0, 40 - 16 + 80, VIRTUAL_WIDTH, 'center')
         love.graphics.printf("[ Abhinav Sharma ]", 0, 40 - 16 + 110, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(Smallfont)
-        love.graphics.printf("GitHub - as567652", 0, 40 - 16 + 140, VIRTUAL_WIDTH, 'center')
+        --love.graphics.printf("GitHub - as567652", 0, 40 - 16 + 140, VIRTUAL_WIDTH, 'center')
         love.graphics.printf("Press [ Enter ] to return to Main Menu", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
     end
 end

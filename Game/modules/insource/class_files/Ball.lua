@@ -11,31 +11,41 @@ function Ball:init()
     self.speed = 185
 
     self.dx = math.random(2) == 1 and -self.speed or self.speed
-    self.dy = math.random(-self.speed, self.speed)
+    self.dy = math.random(-150, -180)
 end
 
 function Ball:update(dt)
     if Gamestate ~= 'PAUSE_TO_PLAY' then
         self.x = self.x + self.dx * dt
-        self.y = self.y + self.dy * dt    
+        self.y = self.y + self.dy * dt
     end
 end
 
-function  Ball:collides(Box)
-    if self.x > Box.x + Box.width or self.x + self.width < Box.x then
-        return false
+function  Ball:Lcollides(Box)
+    --0 for success collision
+    --1 for failed collision
+    if self.x < Box.x + Box.width then
+        if self.y > Box.y - 8 and self.y < Box.y + Box.height + 8 then
+            return 0
+        else
+            return 1
+        end
+    else
+        return -1
     end
-    if self.y > Box.y + Box.height or self.y + self.height < Box.y then
-        return false
-    end
-    return true
 end
 
-function Ball:LRBoundary_Collide()
-    if self.x + self.width >= VIRTUAL_WIDTH then
-        return 1
-    elseif self.x <= 0 then
-        return 2
+function  Ball:Rcollides(Box)
+    --0 for success collision
+    --1 for failed collision
+    if self.x + self.width > Box.x then
+        if self.y > Box.y - 8 and self.y < Box.y + Box.height + 8 then
+            return 0
+        else
+            return 1
+        end
+    else
+        return -1
     end
 end
 

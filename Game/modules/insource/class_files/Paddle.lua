@@ -23,8 +23,8 @@ end
 
 function Paddle:AI(dt, pos)
     if pos < self.y then
-        self.y = math.max(self.y - Paddle_Speed * dt, 0)
+        self.y = math.max(self.y - AI_Paddle_Speed * dt, 0)
     elseif pos + 5 > self.y + self.height then
-        self.y = math.min(self.y + Paddle_Speed * dt, VIRTUAL_HEIGHT - 20)
+        self.y = math.min(self.y + AI_Paddle_Speed * dt, VIRTUAL_HEIGHT - 20)
     end
 end

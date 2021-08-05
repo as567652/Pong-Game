@@ -3,7 +3,8 @@ WINDOW_HEIGHT = 610
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
-Paddle_Speed = 200
+Paddle_Speed = 300
+AI_Paddle_Speed = 110
 
 Class = require 'modules/outsource/class'
 Push = require 'modules/outsource/push'
@@ -29,6 +30,7 @@ function love.load()
     SFX_stat = 'On'
     Volume_Var = 5
     Count_Down_ULTRA = 3
+    Difficulty = 'Medium'
     N = 8
 
     Smallfont = love.graphics.newFont(Font_file, N)
