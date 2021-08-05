@@ -44,11 +44,11 @@ A window will pop up and you are good to go.
 ## Illustrations
 ### Game State FlowChart
 <p align="left">
-  <img src="Pong_Game/Images/Game State FlowChart.png" width=100% title="Game State FlowChart">
+  <img src="Game/Git Files/Game State FlowChart.png" width=100% title="Game State FlowChart">
 </p>
 
 ## Examples
-
+<img src="Game/Git Files/The_Pong_Game.gif" alt="GIF">
 
 ## Project status
   ***Incomplete***
