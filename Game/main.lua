@@ -19,6 +19,17 @@ local Menu_Module = require 'modules/insource/Menu_Module'
 
 Font_file = 'fonts/bb.ttf'
 
+Values = {  {255 / 255, 0 / 255, 0 / 255}, 
+            {255 / 255, 128 / 255, 0 / 255}, 
+            {204 / 255, 0 / 255, 204 / 255},
+            {128 / 255, 255 / 255, 0 / 255}, 
+            {0 / 255, 204 / 255, 0 / 255}, 
+            {0 / 255, 204 / 255, 204 / 255}, 
+            {0 / 255, 128 / 255, 255 / 255}, 
+            {0 / 255, 0 / 255, 255 / 255}, 
+            {127 / 255, 0 / 255, 255 / 255},
+            {255 / 255, 0 / 255, 255 / 255}}
+
 function love.load()
     love.window.setTitle('THE PONG GAME')
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -99,7 +110,9 @@ end
 function love.draw()
     Push:apply('start')
 
-    love.graphics.clear(40/255, 45/255, 52/255, 1)
+    Coloring()
+    
+    love.graphics.setColor(1, 1, 1)
 
     DisplayFPS()
     
@@ -110,8 +123,27 @@ function love.draw()
 end
 
 function DisplayFPS()
-    love.graphics.setColor(0, 1, 0, 1)
     love.graphics.setFont(Smallfont)
     love.graphics.printf('FPS : '..tostring(love.timer.getFPS()), 0, VIRTUAL_HEIGHT - 15, VIRTUAL_WIDTH, 'center')
-    love.graphics.setColor(1, 1, 1, 1)
+end
+
+function Coloring()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.clear()
+    Y = 0
+    N = 10
+    H = VIRTUAL_HEIGHT / N
+    math.randomseed(os.time())
+    Prev = math.random(1, N)
+    for i = 1, N do
+        Next = math.random(1, N)
+        if Prev == Next then
+            Next = (Next + 3) % N + 1
+        end
+        love.graphics.setColor(Values[Next])
+        love.graphics.rectangle('fill', 0, Y, VIRTUAL_WIDTH, H)
+        H = H + VIRTUAL_HEIGHT / N
+        Y = Y + VIRTUAL_HEIGHT / N
+        Prev = Next
+    end
 end

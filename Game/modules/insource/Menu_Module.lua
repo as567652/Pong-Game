@@ -131,17 +131,17 @@ function Menu_Module.keypressed(key)
                 MyBall.speed = 180
                 Paddle_L.height = 25
                 Paddle_R.height = 25
-                Paddle_Speed = 130
+                AI_Paddle_Speed = 140
             elseif Difficulty == 'Medium' then
                 MyBall.speed = 190
                 Paddle_L.height = 20
                 Paddle_R.height = 20
-                Paddle_Speed = 155
+                AI_Paddle_Speed = 155
             elseif Difficulty == 'Hard' then
                 MyBall.speed = 200
                 Paddle_L.height = 15
                 Paddle_R.height = 15
-                Paddle_Speed = 165
+                AI_Paddle_Speed = 250
             end
             VS_COMP_Menu.current_counter_UD = 1
         end
@@ -157,17 +157,17 @@ function Menu_Module.keypressed(key)
                 MyBall.speed = 180
                 Paddle_L.height = 25
                 Paddle_R.height = 25
-                AI_Paddle_Speed = 130
+                Paddle_Speed = 200
             elseif Difficulty == 'Medium' then
                 MyBall.speed = 190
                 Paddle_L.height = 20
                 Paddle_R.height = 20
-                AI_Paddle_Speed = 155
+                Paddle_Speed = 250
             elseif Difficulty == 'Hard' then
                 MyBall.speed = 200
                 Paddle_L.height = 15
                 Paddle_R.height = 15
-                AI_Paddle_Speed = 165
+                Paddle_Speed = 300
             end
             VS_PLAYER_Menu.current_counter_UD = 1
         end
@@ -260,7 +260,7 @@ function Menu_Module.draw()
         love.graphics.printf("..Created by..", 0, 40 - 16 + 80, VIRTUAL_WIDTH, 'center')
         love.graphics.printf("[ Abhinav Sharma ]", 0, 40 - 16 + 110, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(Smallfont)
-        --love.graphics.printf("GitHub - as567652", 0, 40 - 16 + 140, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf("GitHub - as567652", 0, 40 - 16 + 140, VIRTUAL_WIDTH, 'center')
         love.graphics.printf("Press [ Enter ] to return to Main Menu", 0, VIRTUAL_HEIGHT - 30, VIRTUAL_WIDTH, 'center')
     end
 end
