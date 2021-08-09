@@ -84,9 +84,9 @@ First you must have these softwares and languages installed on your system -
 
 
 ## Launch
-Just run this command where Folder **Pong_Game** is located.
+Just run this command where Folder **Game** is located.
 ```
-$ love Pong_Game
+$ love Game
 ```
 A window will pop up and you are good to go.
 
@@ -94,7 +94,7 @@ A window will pop up and you are good to go.
 ## Illustrations
 ### Game State FlowChart
 <p align="left">
-  <img src="Game/Git Files/Game State FlowChart.png" width=100% title="Game State FlowChart">
+  <img src="Game/Git Files/Game State FlowChart.jpg" width=100% title="Game State FlowChart">
 </p>
 
 ## Examples
