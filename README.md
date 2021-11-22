@@ -1,6 +1,11 @@
 # Pong
-Developing Pong Game Using Love2D and Lua
+Developing Retro Type Pong Game Using LÖVE framework. 
+<br>
+LÖVE is a framework for making 2D games in the Lua programming language.
 
+
+![](https://img.shields.io/badge/L%C3%96VE2D%20-v11.1-%23ea316e?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAntJREFUOI11kktsTVEUhr+9z76P0keqmiiirZDShhhhQpCQtATpQEQY1EQiEpEgRGlNPGJiaCAkIp4RiUdIkxoYMfIYlBBplHJxtdrbc59n72Vw7r3R4k/2ZK3/X49/bcUUyLzTsKzpzFiQXV0Tn1aFiEIYR9RTXgwcUUMnJ/HVJPGWGz1pKXT7NmsArDgAtFIoFFWmIh8Xc1bd236ipNF/iC+NWL93PEgbK64sBnAiWHH8KvhRP/Xr+KOHcmFSAdl0bc+o9bvyLigpIGNBCF/GghNifp5baxe7dpfcs7hfDgNoab0IUe9sriiWVADiEeloRj7mkY95Ih3NeAV42TaH3UsW6JZsBplI9gIY5k/fm8ynagBIWyLtjcw8uhGAoGsCAFNXCQfhYf+wmGSg0IAtVLQ+kQMaT60RkXDy9znqDraXdzd1laG4iDNrZ6kgZ4umOWzq53o9UpiYHwbAxTQqUvb1Lxjtgc3iSvxcpkEbpYPSQQWHnxj9b4EvoylwoEvXV8rq6kjF2xIh2hzn07kH/y3Q3fee+qrKsL1SqHh8SJN3tz0Vji0xTc2zFG8OX4GiLyXsu/mcy7aWGSqMK8/g6+l3FYB03nz3LTu2UBC8wJGoqpSlHW0MbmpSiLDizgDfa+fSYrywu9YobYbfdjbMNQBk7UqjvZ8uCEhHNKu2rVaztKb5/lcIAprqG2kp/yqF9gypifShonXFq2y+viNR8K/u2rlOvY4aaiXcM0wWx9YeaE1Ox44Nbq07NakAAH3SODPz43G9yCKxQbFjSFOewdngw9jn4X2J/csfU878A3OeyLz4SKLHxKKzHUAulxivbjj/bYN6NZX7G9C2GGiy4k2BAAAAAElFTkSuQmCC)
+![](https://img.shields.io/badge/Lua-v5.4-%23000080?style=for-the-badge&logo=lua)
 
 ## Table of contents
 * [Introduction](#introduction)
